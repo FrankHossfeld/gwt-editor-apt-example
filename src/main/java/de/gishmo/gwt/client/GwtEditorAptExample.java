@@ -77,16 +77,16 @@ public class GwtEditorAptExample
         StringBuilder sb                = new StringBuilder("");
         sb.append("<br><br>")
           .append("first name:")
-          .append(firstname.getText())
+          .append(person.getFirstName())
           .append("<br>")
           .append("name:")
-          .append(name.getText())
+          .append(person.getName())
           .append("<br>")
           .append("street:")
-          .append(street.getText())
+          .append(person.getAddress().getStreet())
           .append("<br>")
           .append("date:")
-          .append(date.getValue().toString())
+          .append(person.getDate().toString())
           .append("<br><br>");
 
         serverResponseLabel.setHTML(sb.toString());
