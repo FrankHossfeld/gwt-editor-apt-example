@@ -21,7 +21,6 @@ import de.gishmo.gwt.editor.client.annotation.IsEditor;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-@IsEditor(Person.class)
 public class GwtEditorAptExample
   implements EntryPoint,
              Editor<Person> {
@@ -42,7 +41,7 @@ public class GwtEditorAptExample
 
 
 
-  private SimpleBeanEditorDriver<Person, GwtEditorAptExample> driver = new GwtEditorAptExampleEditorDriverImpl();
+  private GwtEditorAptExampleDriver editorDriver = new GwtEditorAptExampleDriverImpl();
 
   private Person person = new Person("Simpson",
                                      "Bart",
@@ -72,7 +71,7 @@ public class GwtEditorAptExample
     flushButton.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(ClickEvent event) {
-        person = driver.flush();
+        person = editorDriver.flush();
 
         StringBuilder sb                = new StringBuilder("");
         sb.append("<br><br>")
@@ -117,7 +116,13 @@ public class GwtEditorAptExample
       }
     });
 
-    driver.initialize(this);
-    driver.edit(person);
+    editorDriver.initialize(this);
+    editorDriver.edit(person);
+  }
+
+
+  @IsEditor
+  interface GwtEditorAptExampleDriver
+    extends SimpleBeanEditorDriver<Person, GwtEditorAptExample> {
   }
 }
